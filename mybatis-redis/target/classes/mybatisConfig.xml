@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="dialect" value="mysql"/>
+    </properties>
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--自动将以下划线方式命名的数据库列映射到Java对象的驼峰命名属性中-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!--二级缓存全局开关默认true-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!--mapper.xml 中resultType="User"不需要写org.example.model.User全称-->
+        <package name="org.example.model"/>
+    </typeAliases>
+
+    <mappers>
+        <package name="org.example.mapper"/>
+    </mappers>
+</configuration>

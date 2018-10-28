@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--targetRuntime设置为MyBatis3Simple，主要是为了避免生成与Example相关的代码和方法-->
+    <!--defaultModelType设置为flat，目的是使每个表只生成一个实体类-->
+    <context id="MySqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--MySQL中使用单引号`作为分隔符-->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                        userId="root" password="root">
+        </jdbcConnection>
+
+        <!--对数据库查询结果进行trim操作，去除字符串前后空格-->
+        <javaModelGenerator targetPackage="org.example.model" targetProject="src\main\java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="org.example.mapper" targetProject="src\main\resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.example.mapper" targetProject="src\main\java"/>
+
+        <!--%匹配数据库中所有的表，所有表都有主键自增id字段，sqlStatement针对当前数据配置MySQL-->
+        <!--<table tableName="%">-->
+            <!--<generatedKey column="id" sqlStatement="MySql"/>-->
+        <!--</table>-->
+
+        <table tableName="user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+    </context>
+</generatorConfiguration>
